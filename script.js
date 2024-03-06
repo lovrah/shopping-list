@@ -1,0 +1,44 @@
+const itemForm = document.getElementById('item-form');
+const itemInput = document.getElementById('item-input');
+const itemList = document.getElementById('item-list');
+
+    // Event Listener
+    function addItem(e) {
+    e.preventDefault();
+
+    const newItem = itemInput.value;
+
+    //Validate Input
+    if (newItem === '') { //om värdet är noll vill vi meddela det och be dem skriva in något 
+        alert('Please add an item');
+        return; //(vi vill inte att någor mer ska hända)
+    }
+
+    // Create list item
+    const li = document.createElement('li');
+    li.appendChild(document.createTextNode(newItem));
+
+    const button = createButton('remove-item btn-link text-red');
+    li.appendChild(button);    
+
+    itemList.appendChild(li);
+
+    itemInput.value = '';
+}
+
+    function createButton(classes) {
+        const button = document.createElement('button');
+        button.className = classes;
+        const icon = createIcon('fa-solid fa-xmark');
+        button.appendChild(icon);
+        return button;
+    }
+
+    function createIcon(classes) {
+        const icon = document.createElement('i');
+        icon.className = classes;
+        return icon;
+    }
+ 
+    //Event Listener
+itemForm.addEventListener('submit', addItem);
